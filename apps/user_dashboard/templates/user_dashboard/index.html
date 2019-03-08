@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>My Old Book Library</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    
+    <style>
+
+    .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    }
+
+    .navbar a {
+    font-family: Montserrat script=all rev=1; font-weight: 700; color: white; 
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    .navbar a:hover {
+    background: #ddd;
+    color: black;
+    }
+
+    .main {
+    padding: 16px;
+    margin-top: 30px;
+    height: 1500px; /* Used in this example to enable scrolling */
+    }
+    .body {
+        background-image: url("{% static '/main/img/leather_repeat.jpg' %}");  
+    }
+    .container{
+        padding-bottom: 50px;
+        margin-top: 50px;
+        margin: auto;
+        width: 80%;
+        color:antiquewhite;
+        text-shadow: 5px 5px 5px black;
+    }    
+    .error{
+    color:darkslategray; 
+    font-size: 80%;
+    }
+    div.gallery {
+      width: 250px;
+      height: 350px;
+      margin: 5px;
+      border: 1px solid black;
+      float: left;
+      background-color:lightsalmon;
+      box-shadow: 5px 5px 5px black ;
+    }
+    div.gallery:hover {
+      border: 1px solid #777;
+    }
+    div.gallery img {
+      width: 100%;
+      height: 350px;
+    }
+    div.desc {
+      padding: 15px;
+      text-align: center;
+    }
+    .parallax { 
+        background-image: url("{% static '/main/img/old_bookshelf.png' %}");
+        height: 200px; 
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: center; 
+        box-shadow: 0px 20px 20px black ;
+    }
+    .top_image {
+        width: 100%;
+        height: 100%;
+        background-image: url("{% static '/main/img/old_bookshelf.png' %}");        
+        color: black; 
+        text-align: center; 
+        line-height: 120px; 
+        vertical-align: top; 
+        font-family: Montserrat script=all rev=1; 
+        font-weight: 900;
+    }
+
+    </style>
+    </head>
+
+    <body class="body">
+        <div class="parallax" >
+            {% include 'main/navbar_main.html' %}
+            <h1 style="font-family: Montserrat script=all rev=1; font-weight: 900; color: white; line-height: 200px;">[ {{ request.session.first_name }} ] Dashboard</h1>
+        </div>
+        <div class="container">
+          <h1>Edit My Account</h1>
+          <form action="/process_account_edit/{{ request.session.user_id }}" class="col-sm-7" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="first_name">First Name:</label>
+                <input type="text" name="first_name" class="form-control" value={{user.first_name}} >
+            </div>
+            <div class="form-group"> 
+                <label for="last_name">Lastt Name:</label>
+                <input type="text" name="last_name" class="form-control" value={{user.last_name}}>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" class="form-control" value={{user.email}}>
+            </div>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li>{{ message }}</li>    
+                {% endfor %}
+            </ul>
+            {% endif %}
+            <p style="color:burlywood; font-size: 80%;" >"Undate will be applied after login back!"</p>
+            <input type='submit' value='Update' class='form-control' style='margin-top: 20px; width: 75px; background-color: lightblue;'> 
+          </form>
+        </div>
+    </body>
+</html>

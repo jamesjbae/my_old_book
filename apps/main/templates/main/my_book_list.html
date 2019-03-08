@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>My Old Book Librarys</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href='/static/css/stylesheet.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <style>
+
+        .navbar {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        }
+    
+        .navbar a {
+        font-family: Montserrat script=all rev=1; font-weight: 700; color: white;
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        }
+    
+        .navbar a:hover {
+        background: #ddd;
+        color: black;
+        }
+    
+        .main {
+        padding: 16px;
+        margin-top: 30px;
+        height: 1500px; /* Used in this example to enable scrolling */
+        }
+        .body {
+            background-image: url("{% static '/main/img/leather_repeat.jpg' %}");  
+        }
+        .container{
+            padding-bottom: 50px;
+            margin-top: 50px;
+            margin: auto;
+        }    
+        .error{
+        color:darkslategray; 
+        font-size: 80%;
+        }
+        div.gallery {
+          width: 250px;
+          height: 400px;
+          margin: 5px;
+          border: 1px solid black;
+          float: left;
+          background-color:lightsalmon;
+          box-shadow: 5px 5px 5px black ;
+        }
+        div.gallery:hover {
+          border: 1px solid #777;
+        }
+        div.gallery img {
+          width: 100%;
+          height: 400px;
+        }
+        div.desc {
+          padding: 15px;
+          text-align: center;
+        }
+        .parallax { 
+            background-image: url("{% static '/main/img/old_bookshelf.png' %}");
+            height: 300px; 
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center; 
+            box-shadow: 0px 20px 20px black ;
+        }
+        .top_image {
+            width: 100%;
+            height: 100%;
+            background-image: url("{% static '/main/img/old_bookshelf.png' %}");        
+            color: black; 
+            text-align: center; 
+            line-height: 120px; 
+            vertical-align: top; 
+            font-family: Montserrat script=all rev=1; 
+            font-weight: 900;
+        }
+        /* FOOTER AREA */
+        .footer-area {
+            height: auto;
+            text-align: center;
+            background-color: black;
+        }
+
+        .footer-area * {
+            color: white;
+        }
+
+        .footer-area > .sns > .item {
+            display: inline-block;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .footer-area > .sns > .item > i {
+            font-size: 24px;
+        }
+
+        .footer-area > .info > p {
+            font-size: 16px;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body class=" body">
+
+    {% include 'main/navbar_main.html' %}
+  
+    <div class="parallax" >
+        {% include 'main/navbar_main.html' %}
+        <h1 style="font-family: Montserrat script=all rev=1; font-weight: 900; color: white; line-height: 300px;">MY BOOK SHELF</h1>
+    </div>
+    <div class="container">
+        <div style="margin-top: 50px;">
+            <table class="table table-bordered" style="background-color: beige; text-align: center;" >
+                <tr style="background-color: rgba(0, 0, 0, 0.7); ">
+                    <th style="text-align: center; color: white; vertical-align: center;">Book</th>
+                    <th style="text-align: center; color: white; vertical-align: center;">Author /<br>Category</th>
+                    <th style="text-align: center; color: white; vertical-align: center;">Discription and Date</th>
+                </tr>
+                {% for book in all_books %}
+                {% if book.reserved_by.id == request.session.user_id %}
+                <tr>
+                    <td><a href='/show_book/{{book.id}}' >{{book.title}} <br>
+                        <img src="{{ book.cover_image.url }}" style="height: 100px; width: 100px; border-radius: 10px;box-shadow: 3px 3px 3px black" ></a>
+                    </td>                    
+                    <td>{{book.author}}<br>{{book.category}}</td>
+                    <td>{{book.discription}}<br>{{book.created_at}}<br>
+                        <a href='/reserve_book/{{book.id}}'>| Reserve |</a>
+                        <a href='/cancel/{{book.id}}'>| Cancel |</a>
+                {% endif %}
+                </tr>
+                <tr>
+                {% if book.uploaded_by.id == request.session.user_id %}
+                <tr>
+                    <td><a href='/show_book/{{book.id}}' >{{book.title}} <br>
+                        <img src="{{ book.cover_image.url }}" style="height: 100px; width: 100px; border-radius: 10px;box-shadow: 3px 3px 3px black" ></a>
+                    </td>                    
+                    <td>{{book.author}}<br>{{book.category}}</td>
+                    <td>{{book.discription}}<br>{{book.created_at}}<br>
+                        <a href='/delete/{{book.id}}'>| Delete |</a>
+                    </td>
+                {% endif %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>  
+    </div>
+    <footer class="footer-area">
+        <div class="sns">
+            <div class="item" id="facebook"><i class="fab fa-facebook-square"></i></div>
+            <div class="item" id="twitter"><i class="fab fa-twitter"></i></div>
+            <div class="item" id="linkedin"><i class="fab fa-linkedin"></i></div>
+            <div class="item" id="google"><i class="fab fa-google-plus"></i></div>
+            <div class="item" id="instagram"><i class="fab fa-instagram"></i></div>
+        </div>
+        <div class="info">
+            <p>Copyright © 2019 Test Corp. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-inverse navbar-default navbar-static-top" style="background-color: darkslategray;">
+    <div class="container-fluid">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar" >
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="/">My Old Book Library</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li ><a href="#">About</a></li>
+            <li><a href="/my_book_list/{{request.session.user_id}}">Reading</a></li>
+            <li><a href="/upload_new_book">Uploading</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li style="margin-top: 7px; color:lightslategray" >
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </li>    
+            {% if 'user_id' in request.session %}
+                <li><a href="/user_dashboard/{{ request.session.user_id }}"><span class="glyphicon glyphicon-user"></span>User |  {{ request.session.first_name }}</a></li>
+                <li><a href="/login_register/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {% else %}
+                <li><a href="/login_register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="/login_register"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            {% endif %}
+        </ul>
+        </div>
+    </div>
+</nav>
+

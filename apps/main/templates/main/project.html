@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>My Old Book Library</title>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <style>
+
+    .navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    }
+
+    .navbar a {
+    font-family: Montserrat script=all rev=1; font-weight: 700; color: white; 
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    }
+
+    .navbar a:hover {
+    background: #ddd;
+    color: black;
+    }
+
+    .main {
+    padding: 16px;
+    margin-top: 0px;
+    height: 1500px; /* Used in this example to enable scrolling */
+    }
+    .body {
+        background-image: url("{% static '/main/img/leather_repeat.jpg' %}");  
+    }
+    .container{
+        padding-bottom: 50px;
+        margin-top: 50px;
+        margin: auto;
+    }    
+    .error{
+    color:darkslategray; 
+    font-size: 80%;
+    }
+    div.gallery {
+      width: 250px;
+      height: 350px;
+      margin: 5px;
+      border: 1px solid black;
+      float: left;
+      background-color:lightsalmon;
+      box-shadow: 5px 5px 5px black ;
+    }
+    div.gallery:hover {
+      border: 1px solid #777;
+    }
+    div.gallery img {
+      width: 100%;
+      height: 350px;
+    }
+    div.desc {
+      padding: 15px;
+      text-align: center;
+    }
+    .parallax { 
+        background-image: url("{% static '/main/img/library_landing.jpg' %}");
+        height: 600px; 
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: center; 
+        box-shadow: 0px 20px 20px black ;
+    }
+    .mission { 
+        background-image: url("{% static '/main/img/library_landing.jpg' %}");
+        min-height: 500px; 
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        text-align: center; 
+        margin: -20px;
+    }
+
+    .top_image {
+        width: 100%;
+        height: 100%;
+        background-image: url("{% static '/main/img/old_bookshelf.png' %}");        
+        color: black; 
+        text-align: center; 
+        line-height: 120px; 
+        vertical-align: top; 
+        font-family: Montserrat script=all rev=1; 
+        font-weight: 900;
+    }
+    .the_goal {
+        min-height: 200px;
+        background-color:lightslategray;
+        margin: 0;
+    }
+    .half_left_box {
+        width: 45%;
+        text-align: center;
+        display: inline-block;
+        vertical-align: middle;
+        padding-left: 50px;
+        min-height: 100px;
+    }
+    .half_right_box {
+        width: 45%;
+        display: inline-block;
+        vertical-align: top;
+        min-height: 100px;
+    }
+
+    /* FOOTER AREA */
+    .footer-area {
+        margin-top: 50px;
+        height: auto;
+        text-align: center;
+        background-color: black;
+    }
+
+    .footer-area * {
+        color: white;
+    }
+
+    .footer-area > .sns > .item {
+        display: inline-block;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .footer-area > .sns > .item > i {
+        font-size: 24px;
+    }
+
+    .footer-area > .info > p {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    </style>
+    </head>
+
+    <body class="body">
+        <div class="parallax" >
+            {% include 'main/navbar_main.html' %}
+            <h1 style="overflow:auto; font-family: Montserrat script=all rev=1; font-size: 70px; font-weight: 900; color: white; line-height: 70px; padding-top: 150px; text-shadow: 5px 5px 5px black;">MY OLD BOOK LIBRARY<br>  <span style="font-family: TimesRoman; font-weight: 400;">- Project -</span> </h1><br>
+            <h1 style="font-family: Montserrat script=all rev=1; font-weight: 600; color: white; line-height: 50px;" > __________________ <br> <span style="font-family: TimesRoman; font-weight:400; font-style: italic;">presented by</span> James Bae</h1>
+        </div>
+
+        <div class="the_goal">
+            <div class="half_left_box" >
+                <h1 style="font-family: Montserrat script=all rev=1; font-size: 70px; font-weight: 900; color: white; line-height: 250px; text-shadow: 5px 5px 5px black;">CONCEPTS</h1>
+            </div>
+            <div class="half_right_box" >
+                <ul style="padding-top: 50px; padding-bottom: 50px;" >
+                    <li style="font-family: Times New Roman; font-weight: 400; font-style: italic; color: white; line-height: 50px;" ><h1>Share values,</h1> </li>
+                    <li style="font-family: Times New Roman; font-weight: 400; font-style: italic; color: white; line-height: 50px;" > <h1>Keep primary sources,</h1></li>
+                    <li style="font-family: Times New Roman; font-weight: 400; font-style: italic; color: white; line-height: 50px;" > <h1> Learn from history</h1></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mission" >
+            <h1 style="overflow:auto; font-family: Montserrat script=all rev=1; font-size: 70px; font-weight: 900; color: white; line-height: 200px; text-shadow: 5px 5px 5px black;">Appreciations</h1>
+            <div style="background-color: rgb(0, 0, 0, 0.7); margin-left: 25%; margin-right: 25%; padding: 3%; border-radius: 10px;">
+                <p style="color: white; text-align: center;">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>                
+            </div>
+        </div>
+
+        <div class="container" style="margin-top: 50px;" >
+            {% for book in all_books %}
+            <div class="gallery">
+                <a target="_blank" href="/show_book/{{ book.id }}">
+                <img src="{{ book.cover_image.url }}" width="600" height="350"></a>
+            </div>
+            {% endfor %}
+        </div>
+        <footer class="footer-area">
+            <div class="sns">
+                <div class="item" id="facebook"><i class="fab fa-facebook-square"></i></div>
+                <div class="item" id="twitter"><i class="fab fa-twitter"></i></div>
+                <div class="item" id="linkedin"><i class="fab fa-linkedin"></i></div>
+                <div class="item" id="google"><i class="fab fa-google-plus"></i></div>
+                <div class="item" id="instagram"><i class="fab fa-instagram"></i></div>
+            </div>
+            <div class="info">
+                <p>Copyright © 2019 Test Corp. All rights reserved.</p>
+            </div>
+        </footer>
+    </body>
+</html>

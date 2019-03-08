@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>My Old Book Library</title>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <style>
+    div.gallery {
+      width: 300px;
+      height: 500px;
+      margin: 0px;
+      border: 1px solid #ccc;
+      float: left;
+      background-color:beige;
+    }
+    div.gallery:hover {
+      border: 1px solid #777;
+    }
+    div.gallery img {
+      width: 100%;
+      height: 400px;
+    }
+    div.desc {
+      padding: 15px;
+      text-align: center;
+    }
+    /* FOOTER AREA */
+    .footer-area {
+      height: auto;
+      text-align: center;
+      background-color: black;
+    }
+
+    .footer-area * {
+      color: white;
+    }
+
+    .footer-area > .sns > .item {
+      display: inline-block;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .footer-area > .sns > .item > i {
+      font-size: 24px;
+    }
+
+    .footer-area > .info > p {
+      font-size: 16px;
+      padding: 10px 0;
+    }
+
+    </style>
+</head>
+
+<body>
+
+  {% include 'main/navbar_main.html' %}
+
+  <div class="container" >
+      {% for book in all_books %}
+      <div class="gallery">
+        <a target="_blank" href="{{ book.sample_chapter.url }}">
+        <img src="{{ book.cover_image.url }}" width="600" height="350">
+        </a>
+        <div class="desc">
+            <a href='/show_book/{{book.id}}' style="color: black;"> <h4> {{book.title}} </h4> </a>{{book.author}}<br>
+            {% if book.reserved_by.id == request.session.user_id %}
+            <a href='/reserve_book/{{book.id}}'>| Reserve |</a>
+            <a href='/cancel/{{book.id}}'>| Cancel |</a>
+            {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+  <footer class="footer-area">
+      <div class="sns">
+          <div class="item" id="facebook"><i class="fab fa-facebook-square"></i></div>
+          <div class="item" id="twitter"><i class="fab fa-twitter"></i></div>
+          <div class="item" id="linkedin"><i class="fab fa-linkedin"></i></div>
+          <div class="item" id="google"><i class="fab fa-google-plus"></i></div>
+          <div class="item" id="instagram"><i class="fab fa-instagram"></i></div>
+      </div>
+      <div class="info">
+          <p>Copyright © 2019 Test Corp. All rights reserved.</p>
+      </div>
+  </footer>
+</html>
